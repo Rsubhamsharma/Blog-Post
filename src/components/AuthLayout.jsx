@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate} from 'react-router-dom'
 import authService from '../appwrite/auth_service'
 import authSlice from '../store/auth.slice'
+import { set } from 'react-hook-form'
 export default function Protected ({children,authentication=true}) {
      const authStatus = useSelector((state)=>state.auth.status)
      const [loader,setLoader] = useState(true)
@@ -15,6 +16,7 @@ export default function Protected ({children,authentication=true}) {
         else if(!authentication && authentication !== authStatus){
             navigate("/")
         }
+        setLoader(false)
      },[authStatus,navigate,authentication])
    return loader? <h1>...Loading</h1> :<>{children}</>
 }
