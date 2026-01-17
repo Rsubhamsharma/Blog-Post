@@ -1,18 +1,21 @@
 import config from "../config/config";
-import { Client, Databases, ID, Query, TablesDB } from "appwrite";
+import { Client, Databases, Storage, ID, Query } from "appwrite";
 
-export class Service{
-    client = new Client();
-    databases;
-    bucket;
+export class Service {
+  client = new Client();
+  databases;
+  bucket;
 
-    constructor(){
-        this.client
-    .setEndpoint(config.apppwriteUrl)
-    .setProject(config.apppwriteProjectId);
+  constructor() {
+    this.client
+      .setEndpoint(config.apppwriteUrl)
+      .setProject(config.apppwriteProjectId);
+
     this.databases = new Databases(this.client);
-    this.bucket = new Storage(this.client)
-    }
+    this.bucket = new Storage(this.client); // ✅ Correct Appwrite Storage
+  }
+
+
     async createPost({title,slug,content,featuredImage,status,userid}){
         try {
            return await this.databases.createDocument(config.apppwriteDatabaseId,
@@ -78,7 +81,7 @@ async getPost(slug){
 }
    async getPosts(queries=[Query.equal("status","active")]){
   try {
-      return await this.databases(config.apppwriteDatabaseId,
+      return await this.databases.listDocuments(config.apppwriteDatabaseId,
         config.apppwriteCollectionId,
         queries)
         

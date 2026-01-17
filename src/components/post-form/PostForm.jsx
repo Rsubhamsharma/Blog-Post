@@ -2,8 +2,8 @@ import React from 'react'
 import { useEffect,useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate} from 'react-router-dom'
-import { set, useForm } from 'react-hook-form'
-import RTE from '../index'
+import {  useForm } from 'react-hook-form'
+import {RTE} from '../index'
 import appwriteService from '../../appwrite/config_service'
 
 function PostForm({post}) {
