@@ -5,10 +5,11 @@ import { useNavigate} from 'react-router-dom'
 import {  useForm } from 'react-hook-form'
 import {RTE} from '../index'
 import appwriteService from '../../appwrite/config_service'
+import {Input , Button ,Select} from '../index.js'
 
 function PostForm({post}) {
     const navigate = useNavigate()
-    const{register,handleSubmit,watch,setValue,getValues}= useForm({
+    const{register,handleSubmit,watch,setValue,getValues,control}= useForm({
         defaultValues:{
             title:post?.title || "",
             slug:post?.slug || "",
